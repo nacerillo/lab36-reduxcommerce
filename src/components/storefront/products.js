@@ -24,41 +24,39 @@ const Products = (props) => {
   //console.log("Props of Category", props.productReducer.activeCat);
   const classes = useStyles();
   return (
-    <div>
+    <>
       <h2>{props.productReducer.activeCat}</h2>
-      <ul>
+      <section className="product_container">
         {props.productReducer.products.map((product) => {
           if (product.category === props.productReducer.activeCat) {
             return (
-              <li>
-                <Card className={classes.root}>
-                  <CardActionArea>
-                    <CardMedia className={classes.media} title={product.name} />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {product.name}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        {product.description}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      Add To Cart
-                    </Button>
-                  </CardActions>
-                </Card>
-              </li>
+              <Card className={classes.root} key={product.name}>
+                <CardActionArea>
+                  <CardMedia className={classes.media} title={product.name} />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {product.name}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {product.description}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button size="small" color="primary">
+                    Add To Cart
+                  </Button>
+                </CardActions>
+              </Card>
             );
           }
         })}
-      </ul>
-    </div>
+      </section>
+    </>
   );
 };
 

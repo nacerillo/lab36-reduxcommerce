@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { selectCategory } from "../../store/categories.js";
 import { setCategory } from "../../store/products.js";
-
+import { AppBar, Breadcrumbs, Link } from "@material-ui/core/";
 const Categories = (props) => {
   console.log("PROPS ON CAT", props);
   const callActions = (name) => {
@@ -9,19 +9,18 @@ const Categories = (props) => {
     props.setCategory(name);
   };
   return (
-    <div>
-      <h2>Categories</h2>
-
-      <ul>
+    <>
+      <h1>Categories</h1>
+      <Breadcrumbs aria-label="breadcrumb">
         {props.categoryReducer.categories.map((category) => {
           return (
-            <li onClick={() => callActions(category.name)}>
+            <Link onClick={() => callActions(category.name)}>
               {category.displayName}
-            </li>
+            </Link>
           );
         })}
-      </ul>
-    </div>
+      </Breadcrumbs>
+    </>
   );
 };
 const mapStateToProps = (state) => ({
