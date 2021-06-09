@@ -6,12 +6,14 @@ let intialState = {
       description:
         "great against would-be assailants and people you dont like!",
       price: 2500,
+      inventory: 5,
     },
     {
       name: "Supervillany for Dummies",
       category: "books",
       description: "start your journey to world domination today",
       price: 35,
+      inventory: 3,
     },
   ],
   activeCat: "",
@@ -27,6 +29,21 @@ const productReducer = (state = intialState, action) => {
       return { ...state, activeCat: selectedCat }; //productsToReturn;
     default:
       return state;
+
+    case "ADD_TO_CART":
+      let products = state.products.map((prod) => {
+        if (prod.name === payload.name) {
+          return {
+            name: prod.name,
+            category: prod.category,
+            description: prod.description,
+            price: prod.price,
+            inventory: prod.inventory - 1,
+          };
+        }
+        return prod;
+      });
+      return { products: products };
   }
 };
 
@@ -34,6 +51,13 @@ export const setCategory = (category) => {
   return {
     type: "SET_CATEGORY",
     payload: category,
+  };
+};
+
+export const addProductToCart = (product) => {
+  return {
+    type: "ADD_TO_CART",
+    payload: product,
   };
 };
 
