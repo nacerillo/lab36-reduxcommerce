@@ -1,17 +1,40 @@
 import React from "react";
-import { AppBar, Toolbar, Button, Link } from "@material-ui/core";
+import { MenuItem, Menu } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import { display } from "@material-ui/system";
 import { makeStyles } from "@material-ui/core/styles";
 import { addProductToCart } from "../../store/cart";
 import { connect } from "react-redux";
-import { When } from "react-if";
+import { If, Then } from "react-if";
+
 const SimpleCart = (props) => {
-  console.log(props);
+  //console.log(props);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <>
-      <When condtion={props.cartReducer.cart.length > 1}>
-        {console.log("THIS IS WORKING")}
-        <div>HELLO!!!!</div>
-      </When>
+      <If condition={props.cartReducer.cart.length > 0}>
+        <Then>
+          <Menu id="simple-menu" open={true}>
+            {props.cartReducer.cart.map((product) => {
+              console.log(product);
+              return (
+                <MenuItem>
+                  {product.name}
+                  <Button>Remove</Button>
+                </MenuItem>
+              );
+            })}
+          </Menu>
+        </Then>
+      </If>
     </>
   );
 };

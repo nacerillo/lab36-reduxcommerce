@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { selectCategory } from "../../store/categories.js";
 import { setCategory } from "../../store/products.js";
-import { AppBar, Breadcrumbs, Link } from "@material-ui/core/";
+import { Breadcrumbs, Link } from "@material-ui/core/";
 const Categories = (props) => {
   console.log("PROPS ON CAT", props);
   const callActions = (name) => {

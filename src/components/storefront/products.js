@@ -42,7 +42,14 @@ const Products = (props) => {
                       color="textSecondary"
                       component="p"
                     >
-                      {product.description}
+                      Description: {product.description}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      In Stock: {product.inventory}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
