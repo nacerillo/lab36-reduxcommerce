@@ -10,7 +10,7 @@ let intialState = {
     {
       name: "Supervillany for Dummies",
       category: "books",
-      description: "Novels, comics, and manuals!",
+      description: "start your journey to world domination today",
       price: 35,
     },
   ],
