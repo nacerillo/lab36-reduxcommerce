@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 //import { selectCategory } from "../../store/categories.js";
-import { setCategory } from "../../store/products.js";
+import { setCategory, addProductToCart } from "../../store/products.js";
 //import { Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 const Products = (props) => {
-  // console.log("Props on Product", props.productReducer);
+  console.log("Props on Product", props.productReducer);
   //console.log("Props of Category", props.productReducer.activeCat);
   const classes = useStyles();
   return (
@@ -47,7 +47,11 @@ const Products = (props) => {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary">
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => props.addProductToCart(product)}
+                  >
                     Add To Cart
                   </Button>
                 </CardActions>
@@ -64,5 +68,5 @@ const mapStateToProps = (state) => ({
   productReducer: state.productReducer,
 });
 
-const mapDispathToProps = { setCategory };
+const mapDispathToProps = { setCategory, addProductToCart };
 export default connect(mapStateToProps, mapDispathToProps)(Products);
