@@ -7,6 +7,7 @@ let intialState = {
         "great against would-be assailants and people you dont like!",
       price: 2500,
       inventory: 5,
+      isActive: true,
     },
     {
       name: "Supervillany for Dummies",
@@ -14,6 +15,7 @@ let intialState = {
       description: "start your journey to world domination today",
       price: 35,
       inventory: 3,
+      isActive: true,
     },
   ],
   activeCat: "",
@@ -24,18 +26,16 @@ const productReducer = (state = intialState, action) => {
   let { type, payload } = action;
 
   switch (type) {
-    case "SET_CATEGORY":
+    case "SELECT_CATEGORY":
       let selectedCat = payload;
+
       return { ...state, activeCat: selectedCat }; //productsToReturn;
 
     case "ADD_TO_CART":
       let products = state.products.map((prod) => {
         if (prod.name === payload.name) {
           return {
-            name: prod.name,
-            category: prod.category,
-            description: prod.description,
-            price: prod.price,
+            ...prod,
             inventory: prod.inventory - 1,
           };
         }
@@ -44,13 +44,10 @@ const productReducer = (state = intialState, action) => {
       return { products: products };
 
     case "REMOVE_FROM_CART":
-      let productsBeta = state.productsBeta.map((prod) => {
+      let productsBeta = state.products.map((prod) => {
         if (prod.name === payload.name) {
           return {
-            name: prod.name,
-            category: prod.category,
-            description: prod.description,
-            price: prod.price,
+            ...prod,
             inventory: prod.inventory + 1,
           };
         }
@@ -63,9 +60,9 @@ const productReducer = (state = intialState, action) => {
   }
 };
 
-export const setCategory = (category) => {
+export const selectCategory = (category) => {
   return {
-    type: "SET_CATEGORY",
+    type: "SELECT_CATEGORY",
     payload: category,
   };
 };
@@ -77,7 +74,7 @@ export const addProductToCart = (product) => {
   };
 };
 
-export const removeProductFromCart = (producr) => {
+export const removeProductFromCart = (product) => {
   return {
     type: "REMOVE_FROM_CART",
     payload: product,

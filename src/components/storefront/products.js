@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 //import { selectCategory } from "../../store/categories.js";
-import { setCategory, addProductToCart } from "../../store/products.js";
+import { selectCategory, addProductToCart } from "../../store/products.js";
 //import { Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -75,5 +75,5 @@ const mapStateToProps = (state) => ({
   productReducer: state.productReducer,
 });
 
-const mapDispathToProps = { setCategory, addProductToCart };
+const mapDispathToProps = { selectCategory, addProductToCart };
 export default connect(mapStateToProps, mapDispathToProps)(Products);
