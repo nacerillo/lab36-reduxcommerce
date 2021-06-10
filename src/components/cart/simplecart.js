@@ -3,7 +3,7 @@ import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
-import { removeFromCart } from "../../store/cart.js";
+import { removeProductFromCart } from "../../store/cart.js";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -57,7 +57,9 @@ const SimpleCart = (props) => {
           return (
             <MenuItem>
               <ListItemIcon>
-                <DeleteOutlinedIcon />
+                <DeleteOutlinedIcon
+                  onClick={() => props.removeProductFromCart(item)}
+                />
               </ListItemIcon>
               <ListItemText primary={item.name} />
             </MenuItem>
@@ -72,5 +74,6 @@ const mapStateToProps = (state) => ({
   cartReducer: state.cartReducer,
 });
 
-export default connect(mapStateToProps)(SimpleCart);
+const mapDispathToProps = { removeProductFromCart };
+export default connect(mapStateToProps, mapDispathToProps)(SimpleCart);
 //export default Header;

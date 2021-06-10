@@ -27,8 +27,6 @@ const productReducer = (state = intialState, action) => {
     case "SET_CATEGORY":
       let selectedCat = payload;
       return { ...state, activeCat: selectedCat }; //productsToReturn;
-    default:
-      return state;
 
     case "ADD_TO_CART":
       let products = state.products.map((prod) => {
@@ -44,6 +42,24 @@ const productReducer = (state = intialState, action) => {
         return prod;
       });
       return { products: products };
+
+    case "REMOVE_FROM_CART":
+      let productsBeta = state.productsBeta.map((prod) => {
+        if (prod.name === payload.name) {
+          return {
+            name: prod.name,
+            category: prod.category,
+            description: prod.description,
+            price: prod.price,
+            inventory: prod.inventory + 1,
+          };
+        }
+        return prod;
+      });
+      return { products: productsBeta };
+
+    default:
+      return state;
   }
 };
 
@@ -57,6 +73,13 @@ export const setCategory = (category) => {
 export const addProductToCart = (product) => {
   return {
     type: "ADD_TO_CART",
+    payload: product,
+  };
+};
+
+export const removeProductFromCart = (producr) => {
+  return {
+    type: "REMOVE_FROM_CART",
     payload: product,
   };
 };
