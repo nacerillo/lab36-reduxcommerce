@@ -39,7 +39,7 @@ const Products = (props) => {
         {props.productReducer.products.map((product) => {
           if (product.category === props.productReducer.activeCat) {
             return (
-              <Card className={classes.root} key={product.name}>
+              <Card className={classes.root} key={product._id}>
                 <CardActionArea>
                   <CardMedia className={classes.media} title={product.name} />
                   <CardContent>
@@ -58,7 +58,14 @@ const Products = (props) => {
                       color="textSecondary"
                       component="p"
                     >
-                      In Stock: {product.inventory}
+                      In Stock: {product.inStock}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      Price: {product.price}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
