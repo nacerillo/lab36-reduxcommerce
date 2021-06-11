@@ -1,21 +1,23 @@
 import { connect } from "react-redux";
 import { selectCategory, getCategories } from "../../store/categories.js";
 import { Breadcrumbs, Link } from "@material-ui/core/";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 const Categories = (props) => {
+  useEffect(() => {
+    console.log("HELLO");
+    props.getCategories();
+  }, []);
+
   console.log("PROPS ON CAT", props);
   const callActions = (name) => {
     props.selectCategory(name);
   };
 
-  useEffect(() => {
-    props.getCategories();
-  }, []);
   return (
     <>
       <h1>Categories</h1>
       <Breadcrumbs aria-label="breadcrumb">
-        {props.categoryReducer.map((category) => {
+        {props.categoryReducer.categories.map((category) => {
           {
             console.log(category.name);
           }

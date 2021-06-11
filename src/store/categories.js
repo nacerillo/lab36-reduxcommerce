@@ -14,7 +14,6 @@
  
 };*/
 import superagent from "superagent";
-import { thunk } from "redux-thunk";
 let categoryState = { categories: [], activeCat: "" };
 let api = "https://api-js401.herokuapp.com/api/v1/categories";
 
@@ -30,7 +29,7 @@ const categoryReducer = (state = categoryState, action) => {
       return { ...state, activeCat };
 
     case "GET_CAT":
-      return payload;
+      return { ...state, categories: payload };
 
     default:
       return state;
