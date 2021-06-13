@@ -92,6 +92,7 @@ export const removeProductFromCart = (product) => {
   };
 };
 
+export const getSingleProduct = () => (dispatch) => {};
 export const getProducts = () => (dispatch) => {
   return superagent.get(api).then((response) => {
     console.log("DATA:", response.body);
@@ -103,6 +104,13 @@ export const getProds = (data) => {
   return {
     type: "GET_PRODS",
     payload: data,
+  };
+};
+
+export const getSingleProd = (id) => {
+  return {
+    type: "GET_SINGLE_PRODUCT",
+    payload: id,
   };
 };
 

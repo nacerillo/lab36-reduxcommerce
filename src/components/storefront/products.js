@@ -79,9 +79,6 @@ const Products = (props) => {
                   >
                     Add To Cart
                   </Button>
-                  <Route path="product/:id">
-                    <Details />
-                  </Route>
                 </CardActions>
               </Card>
             );
