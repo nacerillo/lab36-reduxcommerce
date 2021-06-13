@@ -1,6 +1,10 @@
 import { connect } from "react-redux";
 //import { selectCategory } from "../../store/categories.js";
-import { setCategory, addProductToCart } from "../../store/products.js";
+import {
+  selectCategory,
+  addProductToCart,
+  getProducts,
+} from "../../store/products.js";
 //import { Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -10,7 +14,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
+import React, { useEffect } from "react";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -19,8 +23,13 @@ const useStyles = makeStyles({
     height: 140,
   },
 });
+
 const Products = (props) => {
   console.log("Props on Product", props.productReducer);
+  useEffect(() => {
+    console.log("HELLO PRODUCTS");
+    props.getProducts();
+  }, []);
   //console.log("Props of Category", props.productReducer.activeCat);
   const classes = useStyles();
   return (
@@ -30,7 +39,7 @@ const Products = (props) => {
         {props.productReducer.products.map((product) => {
           if (product.category === props.productReducer.activeCat) {
             return (
-              <Card className={classes.root} key={product.name}>
+              <Card className={classes.root} key={product._id}>
                 <CardActionArea>
                   <CardMedia className={classes.media} title={product.name} />
                   <CardContent>
@@ -42,7 +51,21 @@ const Products = (props) => {
                       color="textSecondary"
                       component="p"
                     >
-                      {product.description}
+                      Description: {product.description}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      In Stock: {product.inStock}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      Price: {product.price}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -68,5 +91,5 @@ const mapStateToProps = (state) => ({
   productReducer: state.productReducer,
 });
 
-const mapDispathToProps = { setCategory, addProductToCart };
+const mapDispathToProps = { selectCategory, addProductToCart, getProducts };
 export default connect(mapStateToProps, mapDispathToProps)(Products);

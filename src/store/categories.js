@@ -1,4 +1,4 @@
-let categoryState = {
+/*let categoryState = {
   categories: [
     {
       name: "electronics",
@@ -11,8 +11,11 @@ let categoryState = {
       description: "Novels, comics, and manuals!",
     },
   ],
-  activeCat: "",
-};
+ 
+};*/
+import superagent from "superagent";
+let categoryState = { categories: [], activeCat: "" };
+let api = "https://api-js401.herokuapp.com/api/v1/categories";
 
 //reducer
 const categoryReducer = (state = categoryState, action) => {
@@ -22,7 +25,12 @@ const categoryReducer = (state = categoryState, action) => {
     case "SELECT_CATEGORY":
       let activeCat = payload;
       console.log(activeCat);
+
       return { ...state, activeCat };
+
+    case "GET_CAT":
+      return { ...state, categories: payload };
+
     default:
       return state;
   }
@@ -36,5 +44,17 @@ export const selectCategory = (category) => {
   };
 };
 
+export const getCategories = () => (dispatch) => {
+  return superagent.get(api).then((response) => {
+    console.log("DATA:", response.body.results);
+    dispatch(getCat(response.body.results));
+  });
+};
+
+const getCat = (data) => {
+  return {
+    type: "GET_CAT",
+    payload: data,
+  };
+};
 export default categoryReducer;
-//export defualt productReducer;
