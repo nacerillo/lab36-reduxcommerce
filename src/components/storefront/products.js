@@ -15,6 +15,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -77,6 +79,9 @@ const Products = (props) => {
                   >
                     Add To Cart
                   </Button>
+                  <Route path="product/:id">
+                    <Details />
+                  </Route>
                 </CardActions>
               </Card>
             );
